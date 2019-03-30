@@ -29,22 +29,18 @@ namespace LinqLab
         static void DataParser()
         {
             string path = "../../../../data.json";
-            var json = File.ReadAllText(path);
+            var json = "";
+
+            using (StreamReader sr = File.OpenText(path))
+            {
+                json = sr.ReadToEnd();
+            }
 
             Console.WriteLine(json);
 
-            ///
+            var Data = JsonConvert.DeserializeObject<FeatureCollection>(json);
 
-
-            var Data = JsonConvert.DeserializeObject<Data>(json);
-
-            var allNeighborhood = Data.features.Select(x => x).Select(x => x.Properties).Select(x => x.neighborhood);
-
-            foreach (var item in allNeighborhood)
-            {
-                Console.WriteLine(item);
-            }
-
+            
             //var deserializedData = JsonConvert.DeserializeObject<Classes.Data>(json);
             // Console.WriteLine(jason);
             // return deserializedData;

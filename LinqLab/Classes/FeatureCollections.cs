@@ -6,12 +6,10 @@ namespace LinqLab.Classes
 {
     public class FeatureCollection
     {
-
         [JsonProperty("Type")]
         public string Type { get; set; }
 
         [JsonProperty("Features")]
         public List<Feature> Features { get; set; }
-
     }
 }
