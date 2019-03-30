@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System;
 
 namespace LinqLab
 {
@@ -23,12 +23,31 @@ namespace LinqLab
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            ReadTest();
+            DataParser();
         }
-        static void ReadTest()
+        static void DataParser()
         {
-            //path
             string path = "../../../../data.json";
+            var json = File.ReadAllText(path);
+
+
+
+            using (StreamReader sr = File.OpenText(path))
+            {
+                while ((json = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(json);
+                }
+            }
+
+
+
+
+            //var deserializedData = JsonConvert.DeserializeObject<Classes.Data>(json);
+            // Console.WriteLine(jason);
+            // return deserializedData;
+        }
+            //path
             // instantiate serializer for use
             //JsonSerializer serializer = new JsonSerializer();
             //// open strem to file
@@ -37,15 +56,15 @@ namespace LinqLab
             //    Console.WriteLine($"sw called: {path}");
             //}
 
-            using (StreamReader reader = File.OpenText(path))
-            {
-                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-                // do stuff
-                Console.WriteLine("reader form file");
-            }
+            // using (StreamReader reader = File.OpenText(path))
+            // {
+            //     JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+            //     // do stuff
+            //     Console.WriteLine("reader form file");
+            // }
 
 
 
-        }
+        
     }
 }
