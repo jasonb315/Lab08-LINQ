@@ -23,7 +23,6 @@ namespace LinqLab
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             DataParser();
         }
         static void DataParser()
@@ -36,33 +35,14 @@ namespace LinqLab
                 json = sr.ReadToEnd();
             }
 
-            Console.WriteLine(json);
+            //Console.WriteLine(json);
 
             var Data = JsonConvert.DeserializeObject<FeatureCollection>(json);
 
-            
-            //var deserializedData = JsonConvert.DeserializeObject<Classes.Data>(json);
-            // Console.WriteLine(jason);
-            // return deserializedData;
+            foreach (var item in Data.Features)
+            {
+                Console.WriteLine(item.Properties.city);
+            }
         }
-            //path
-            // instantiate serializer for use
-            //JsonSerializer serializer = new JsonSerializer();
-            //// open strem to file
-            //using (StreamWriter sw = new StreamWriter(path))
-            //{
-            //    Console.WriteLine($"sw called: {path}");
-            //}
-
-            // using (StreamReader reader = File.OpenText(path))
-            // {
-            //     JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-            //     // do stuff
-            //     Console.WriteLine("reader form file");
-            // }
-
-
-
-        
     }
 }
