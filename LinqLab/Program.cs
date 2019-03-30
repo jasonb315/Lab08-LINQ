@@ -3,6 +3,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System;
+using LinqLab.Classes;
 
 namespace LinqLab
 {
@@ -32,8 +33,17 @@ namespace LinqLab
 
             Console.WriteLine(json);
 
+            ///
 
 
+            var Data = JsonConvert.DeserializeObject<Data>(json);
+
+            var allNeighborhood = Data.features.Select(x => x).Select(x => x.Properties).Select(x => x.neighborhood);
+
+            foreach (var item in allNeighborhood)
+            {
+                Console.WriteLine(item);
+            }
 
             //var deserializedData = JsonConvert.DeserializeObject<Classes.Data>(json);
             // Console.WriteLine(jason);
