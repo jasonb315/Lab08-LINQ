@@ -1,4 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.IO;
+using System;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace LinqLab
 {
@@ -19,6 +23,29 @@ namespace LinqLab
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            ReadTest();
+        }
+        static void ReadTest()
+        {
+            //path
+            string path = "../../../../data.json";
+            // instantiate serializer for use
+            //JsonSerializer serializer = new JsonSerializer();
+            //// open strem to file
+            //using (StreamWriter sw = new StreamWriter(path))
+            //{
+            //    Console.WriteLine($"sw called: {path}");
+            //}
+
+            using (StreamReader reader = File.OpenText(path))
+            {
+                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+                // do stuff
+                Console.WriteLine("reader form file");
+            }
+
+
+
         }
     }
 }
