@@ -30,15 +30,7 @@ namespace LinqLab
             string path = "../../../../data.json";
             var json = File.ReadAllText(path);
 
-
-
-            using (StreamReader sr = File.OpenText(path))
-            {
-                while ((json = sr.ReadLine()) != null)
-                {
-                    Console.WriteLine(json);
-                }
-            }
+            Console.WriteLine(json);
 
 
 
