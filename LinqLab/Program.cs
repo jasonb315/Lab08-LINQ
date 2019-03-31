@@ -8,19 +8,24 @@ using System.Linq;
 
 namespace LinqLab
 {
-    //Create a program that brings in data from an external file, reads the data, and can filter the data based on specified values.
-
-    //        Questions
-    //-Each query builds off of the next.
-    //Rewrite at least one of these questions only using the opposing method(example:
-    //Use LINQ Query statements instead of LINQ method calls and vice versa.)
-
     class Program
     {
         static void Main(string[] args)
         {
-            DataParser();
+            try
+            {
+                DataParser();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Exiting Program");
+            }
         }
+
         static void DataParser()
         {
             string path = "../../../../data.json";
@@ -74,7 +79,6 @@ namespace LinqLab
                                                .Where(x => x != "")
                                                .Distinct();
 
-
             foreach (var item in neighborhoods)
             {
                 Console.WriteLine(item);
@@ -93,9 +97,6 @@ namespace LinqLab
             //    //Console.WriteLine(item.Properties.county);
             //    //Console.WriteLine();
             //}
-
-
-
         }
     }
 }
