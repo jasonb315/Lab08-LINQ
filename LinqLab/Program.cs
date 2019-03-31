@@ -39,10 +39,32 @@ namespace LinqLab
 
             var Data = JsonConvert.DeserializeObject<FeatureCollection>(json);
 
+            //foreach (var item in Data.Features)
+            //{
+            //    Console.WriteLine(item.Properties.zip);
+            //}
+            //FRegistery<Feature> FRegistry = new FRegistery<Feature>();
+
+            List<Feature> bank = new List<Feature>();
+
             foreach (var item in Data.Features)
             {
-                Console.WriteLine(item.Properties.city);
+                bank.Add(item);
             }
+
+            foreach (var item in bank)
+            {
+                Console.WriteLine(item.type);
+                Console.WriteLine(item.Properties.zip);
+                Console.WriteLine(item.Properties.city);
+                Console.WriteLine(item.Properties.state);
+                Console.WriteLine(item.Properties.address);
+                Console.WriteLine(item.Properties.borough);
+                Console.WriteLine(item.Properties.neighborhood);
+                Console.WriteLine(item.Properties.county);
+                Console.WriteLine();
+            }
+
         }
     }
 }
