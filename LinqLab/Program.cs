@@ -45,9 +45,7 @@ namespace LinqLab
                 bank.Add(item);
             }
 
-            Feature[] f = bank.ToArray();
-
-            var query = from i in f.Distinct()
+            var query = from i in bank.Distinct()
                         where i.Properties.neighborhood.Length > 0
                         where i.Properties.address.Length > 0
                         orderby i.Properties.zip
