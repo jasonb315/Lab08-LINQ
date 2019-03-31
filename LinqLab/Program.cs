@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System;
 using LinqLab.Classes;
+using System.Linq;
 
 namespace LinqLab
 {
@@ -11,11 +12,6 @@ namespace LinqLab
 
     //        Questions
     //-Each query builds off of the next.
-
-    //Output all of the neighborhoods in this data list
-    //Filter out all the neighborhoods that do not have any names
-    //Remove the Duplicates
-    //Rewrite the queries from above, and consolidate all into one single query.
     //Rewrite at least one of these questions only using the opposing method(example:
     //Use LINQ Query statements instead of LINQ method calls and vice versa.)
 
@@ -35,35 +31,70 @@ namespace LinqLab
                 json = sr.ReadToEnd();
             }
 
-            //Console.WriteLine(json);
-
             var Data = JsonConvert.DeserializeObject<FeatureCollection>(json);
 
-            //foreach (var item in Data.Features)
-            //{
-            //    Console.WriteLine(item.Properties.zip);
-            //}
-            //FRegistery<Feature> FRegistry = new FRegistery<Feature>();
 
-            List<Feature> bank = new List<Feature>();
-
+            List<Feature> bank = new ArrayList<Feature>();
             foreach (var item in Data.Features)
             {
                 bank.Add(item);
             }
 
-            foreach (var item in bank)
+            Feature[] f = bank.ToArray();
+
+            var query = from i in f.Distinct()
+                        where i.Properties.neighborhood.Length > 0
+                        where i.Properties.address.Length > 0
+                        orderby i.Properties.zip
+                        select i;
+
+            // consolidated query with filter
+            int itemNumber = 0;
+            foreach (var item in query)
             {
-                Console.WriteLine(item.type);
-                Console.WriteLine(item.Properties.zip);
-                Console.WriteLine(item.Properties.city);
-                Console.WriteLine(item.Properties.state);
+                Console.WriteLine("----------------------");
+                Console.WriteLine($"ITEM: {itemNumber}:");
+                //Console.WriteLine(item.type);
+                //Console.WriteLine(item.Properties.zip);
+                //Console.WriteLine(item.Properties.city);
+                //Console.WriteLine(item.Properties.state);
                 Console.WriteLine(item.Properties.address);
                 Console.WriteLine(item.Properties.borough);
                 Console.WriteLine(item.Properties.neighborhood);
-                Console.WriteLine(item.Properties.county);
-                Console.WriteLine();
+                //Console.WriteLine(item.Properties.county);
+                Console.WriteLine("----------------------");
+                itemNumber++;
             }
+
+            Console.WriteLine("NEIGHBORHOODS");
+
+            // alternate query
+            var neighborhoods = Data.Features.Select(x => x)
+                                               .Select(x => x.Properties.neighborhood)
+                                               .Where(x => x != "")
+                                               .Distinct();
+
+
+            foreach (var item in neighborhoods)
+            {
+                Console.WriteLine(item);
+            }
+
+            //foreach (var item in bank)
+            //{
+
+            //    //Console.WriteLine(item.type);
+            //    //Console.WriteLine(item.Properties.zip);
+            //    //Console.WriteLine(item.Properties.city);
+            //    //Console.WriteLine(item.Properties.state);
+            //    //Console.WriteLine(item.Properties.address);
+            //    //Console.WriteLine(item.Properties.borough);
+            //    //Console.WriteLine(item.Properties.neighborhood);
+            //    //Console.WriteLine(item.Properties.county);
+            //    //Console.WriteLine();
+            //}
+
+
 
         }
     }
