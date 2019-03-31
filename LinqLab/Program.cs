@@ -51,7 +51,6 @@ namespace LinqLab
                         orderby i.Properties.zip
                         select i;
 
-            // consolidated query with filter
             int itemNumber = 0;
             foreach (var item in query)
             {
@@ -81,20 +80,6 @@ namespace LinqLab
             {
                 Console.WriteLine(item);
             }
-
-            //foreach (var item in bank)
-            //{
-
-            //    //Console.WriteLine(item.type);
-            //    //Console.WriteLine(item.Properties.zip);
-            //    //Console.WriteLine(item.Properties.city);
-            //    //Console.WriteLine(item.Properties.state);
-            //    //Console.WriteLine(item.Properties.address);
-            //    //Console.WriteLine(item.Properties.borough);
-            //    //Console.WriteLine(item.Properties.neighborhood);
-            //    //Console.WriteLine(item.Properties.county);
-            //    //Console.WriteLine();
-            //}
         }
     }
 }
