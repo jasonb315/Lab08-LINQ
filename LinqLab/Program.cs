@@ -68,13 +68,13 @@ namespace LinqLab
                 itemNumber++;
             }
 
-            Console.WriteLine("NEIGHBORHOODS");
+            Console.WriteLine("NEIGHBORHOOD LIST");
 
             // alternate query
             var neighborhoods = Data.Features.Select(x => x)
-                                               .Select(x => x.Properties.neighborhood)
-                                               .Where(x => x != "")
-                                               .Distinct();
+                                             .Select(x => x.Properties.neighborhood)
+                                             .Where(x => x != "")
+                                             .Distinct();
 
             foreach (var item in neighborhoods)
             {
