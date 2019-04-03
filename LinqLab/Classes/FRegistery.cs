@@ -16,6 +16,10 @@ namespace LinqLab.Classes
             count++;
         }
 
+        /// <summary>
+        ///     Enumerated through list
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < count; i++)

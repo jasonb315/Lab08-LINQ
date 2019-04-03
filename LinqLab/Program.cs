@@ -26,6 +26,9 @@ namespace LinqLab
             }
         }
 
+        /// <summary>
+        ///     Retrieves file, filters entries, prints to CLI
+        /// </summary>
         static void DataParser()
         {
             string path = "../../../../data.json";
@@ -37,7 +40,6 @@ namespace LinqLab
             }
 
             var Data = JsonConvert.DeserializeObject<FeatureCollection>(json);
-
 
             List<Feature> bank = new ArrayList<Feature>();
             foreach (var item in Data.Features)
